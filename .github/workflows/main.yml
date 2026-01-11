@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>شرح سكريبتات Flet</title>
+<style>
+  :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--text:#e6eef6}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:var(--text);line-height:1.6}
+  .container{max-width:900px;margin:36px auto;padding:24px}
+  h1,h2{margin:6px 0}
+  h1{font-size:22px;color:var(--accent)}
+  h2{font-size:18px;color:#ffffff;margin-top:16px}
+  p,li{color:var(--text)}
+  ul{padding-left:20px}
+  pre{background:#021226;padding:12px;border-radius:8px;overflow:auto;color:#dff3ff}
+  .card{background:var(--card);padding:18px;border-radius:12px;margin-bottom:14px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+  .note{background:rgba(255,255,255,0.05);padding:10px;border-left:4px solid var(--accent);border-radius:8px;color:var(--muted)}
+  footer{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>شرح سكريبتات مكتبة Flet</h1>
+<p>هذا الملف يشرح جميع السكريبتات المرسلة ويعرض دوال Flet المستخدمة فيها ووظيفتها بشكل مبسّط واحترافي.</p>
+
+<!-- السكريبت الرئيسي -->
+<div class="card">
+<h2>1. السكريبت الرئيسي (main.py)</h2>
+<p>وظيفته: تشغيل التطبيق، إعداد نافذة البرنامج، ربط AppBar و NavigationBar، وإضافة كل المكونات.</p>
+
+<ul>
+<li><strong>page.title</strong> : عنوان نافذة التطبيق.</li>
+<li><strong>page.window.width/height</strong> : أبعاد النافذة.</li>
+<li><strong>page.bgcolor</strong> : لون خلفية الصفحة.</li>
+<li><strong>page.theme_mode</strong> : وضع الثيم (داكن أو فاتح).</li>
+<li><strong>page.padding</strong> : مسافة الحواف داخل الصفحة.</li>
+<li><strong>page.vertical_alignment / page.horizontal_alignment</strong> : محاذاة العناصر.</li>
+<li><strong>page.scroll</strong> : طريقة التمرير داخل الصفحة.</li>
+<li><strong>page.add()</strong> : لإضافة عناصر و Widgets إلى الصفحة.</li>
+<li><strong>flet.app(target=main)</strong> : لتشغيل التطبيق.</li>
+</ul>
+<pre>
+page.add(
+    create_image(),
+    flet.Text("FAMILY RESTURANT FOOD", color=flet.Colors.WHITE, size=20, weight="bold"),
+    create_cards(),
+    virt_card(),
+)
+</pre>
+</div>
+
+<!-- create_appbar -->
+<div class="card">
+<h2>2. AppBar (create_appbar.py)</h2>
+<p>إنشاء شريط العنوان في التطبيق مع أيقونات</p>
+<ul>
+<li><strong>flet.AppBar</strong> : لإنشاء شريط أعلى الصفحة.</li>
+<li><strong>title=flet.Text(...)</strong> : النص داخل الـ AppBar.</li>
+<li><strong>bgcolor</strong> : لون الخلفية.</li>
+<li><strong>leading</strong> : الأيقونة على يسار الشريط.</li>
+<li><strong>actions</strong> : قائمة الأيقونات على اليمين.</li>
+<li><strong>flet.IconButton</strong> : زر أيقونة قابل للنقر.</li>
+</ul>
+</div>
+
+<!-- create_cards -->
+<div class="card">
+<h2>3. Cards (create_cards.py)</h2>
+<p>إنشاء مجموعة بطاقات عرض صور المنتجات.</p>
+<ul>
+<li><strong>flet.Container</strong> : لإنشاء صندوق أو بطاقة.</li>
+<li><strong>flet.Image</strong> : لعرض الصور.</li>
+<li><strong>flet.Row</strong> : ترتيب العناصر أفقياً.</li>
+<li><strong>scroll=flet.ScrollMode.AUTO</strong> : التمرير في حالة زيادة العناصر.</li>
+<li><strong>flet.BoxShadow</strong> : إضافة ظل للبطاقات.</li>
+<li><strong>border_radius</strong> : تدوير حواف الصناديق.</li>
+</ul>
+</div>
+
+<!-- create_navbar -->
+<div class="card">
+<h2>4. NavigationBar (create_navbar.py)</h2>
+<p>إنشاء شريط التنقل أسفل التطبيق.</p>
+<ul>
+<li><strong>flet.NavigationBar</strong> : عنصر التنقل.</li>
+<li><strong>bgcolor</strong> : لون الخلفية.</li>
+<li><strong>indicator_color</strong> : لون مؤشر العنصر المحدد.</li>
+<li><strong>destinations</strong> : قائمة الوجهات <em>NavigationBarDestination</em>.</li>
+<li><strong>flet.NavigationBarDestination</strong> : عنصر فردي في شريط التنقل.</li>
+</ul>
+</div>
+
+<!-- create_image -->
+<div class="card">
+<h2>5. Image Container (create_image.py)</h2>
+<p>إنشاء عنصر صورة شعار التطبيق.</p>
+<ul>
+<li><strong>flet.Container</strong> : يحتوي الصورة ويوضع في الصفحة.</li>
+<li><strong>flet.Image</strong> : يعرض صورة <code>logo.png</code>.</li>
+<li><strong>fit=flet.ImageFit.COVER</strong> : ملء المساحة بالكامل مع الحفاظ على نسبة الصورة.</li>
+<li><strong>alignment=flet.alignment.center</strong> : محاذاة الصورة في الوسط.</li>
+</ul>
+</div>
+
+<!-- create_theme -->
+<div class="card">
+<h2>6. Theme (create_theme.py)</h2>
+<p>إنشاء ثيم مخصص للتطبيق.</p>
+<ul>
+<li><strong>flet.Theme</strong> : ضبط الثيم العام.</li>
+<li><strong>flet.NavigationBarTheme</strong> : ثيم شريط التنقل.</li>
+<li><strong>label_text_style=flet.TextStyle(color="yellow")</strong> : ضبط لون نص العناصر في NavigationBar.</li>
+</ul>
+</div>
+
+<!-- virt_card -->
+<div class="card">
+<h2>7. Virtual Cards (virt_card.py)</h2>
+<p>إنشاء بطاقات افتراضية لكل منتج مع الاسم والسعر والتقييم.</p>
+<ul>
+<li><strong>flet.Column / flet.Row</strong> : ترتيب النصوص والصورة.</li>
+<li><strong>flet.Text</strong> : عرض اسم المنتج والسعر.</li>
+<li><strong>flet.Icon(flet.Icons.STAR)</strong> : عرض التقييم بالنجوم.</li>
+<li><strong>flet.Container</strong> : صندوق لكل بطاقة.</li>
+<li><strong>flet.Image</strong> : صورة المنتج.</li>
+<li><strong>flet.BoxShadow</strong> : ظل للبطاقة.</li>
+<li><strong>border_radius</strong> : تدوير حواف البطاقة.</li>
+</ul>
+</div>
+
+<!-- قائمة مجمعة لكل دوال Flet المستخدمة -->
+<div class="card">
+<h2>8. قائمة دوال ومكونات Flet المستخدمة في السكربتات</h2>
+<ul>
+<li>flet.app(target=...) : لتشغيل التطبيق.</li>
+<li>flet.Page : الصفحة الرئيسية.</li>
+<li>page.add() : إضافة عناصر للصفحة.</li>
+<li>page.title / page.bgcolor / page.theme_mode / page.padding</li>
+<li>page.window.width/height/maximizable/minimizable/resizable</li>
+<li>page.vertical_alignment / page.horizontal_alignment</li>
+<li>page.scroll : طريقة التمرير.</li>
+<li>flet.AppBar / flet.Text / flet.Icon / flet.IconButton</li>
+<li>flet.NavigationBar / flet.NavigationBarDestination</li>
+<li>flet.Container / flet.Image / flet.Row / flet.Column</li>
+<li>flet.BoxShadow / border_radius / alignment / fit / padding / margin / spacing</li>
+<li>flet.Theme / flet.NavigationBarTheme / flet.TextStyle</li>
+<li>flet.Colors : ألوان جاهزة</li>
+<li>flet.ImageFit : COVER</li>
+<li>flet.ThemeMode.DARK</li>
+<li>flet.MainAxisAlignment / flet.CrossAxisAlignment</li>
+<li>flet.ScrollMode.AUTO</li>
+<li>flet.NavigationBarLabelBehavior.ALWAYS_SHOW</li>
+<li>flet.Icons : أيقونات جاهزة مثل HOME, ACCOUNT_CIRCLE, NOTIFICATIONS, STAR</li>
+</ul>
+</div>
+
+<footer>ملف تعليمي كامل لكل السكريبتات المرسلة مع كل دوال Flet المستخدمة</footer>
+
+</div>
+</body>
+</html>
